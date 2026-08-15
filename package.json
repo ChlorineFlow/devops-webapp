@@ -1,0 +1,9 @@
+{
+    "name": "devops-webapp",
+    "version": "1.0.0",
+    "description": "DevOps CI/CD Virtual Lab",
+    "scripts": {
+        "build": "node build.js",
+        "test": "node test.js"
+    }
+}
