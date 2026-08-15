@@ -33,3 +33,19 @@ jobs:
 
       - name: Show Build Output
         run: ls -la dist
+
+      - name: Send Success Notification
+        if: success()
+        run: |
+          curl -X POST \
+          -H "Content-type: application/json" \
+          --data '{"text":"✅ CI Pipeline SUCCESS - devops-webapp build and tests completed successfully."}' \
+          "${{ secrets.SLACK_WEBHOOK_URL }}"
+
+      - name: Send Failure Notification
+        if: failure()
+        run: |
+          curl -X POST \
+          -H "Content-type: application/json" \
+          --data '{"text":"❌ CI Pipeline FAILED - devops-webapp build or tests failed. Check GitHub Actions logs."}' \
+          "${{ secrets.SLACK_WEBHOOK_URL }}"
